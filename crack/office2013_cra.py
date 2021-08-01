@@ -14,6 +14,6 @@ def office_crack(path: str) -> None:
     osbb_path = join(path, 'OFFICE2013', 'Office15')
     chdir(osbb_path)
     system('cscript ospp.vbs /sethst:wanghuoyao.top')
-    system('cscript ospp.vbs /setprt:1905')
+    system('cscript ospp.vbs /setprt:9005')
     system('cscript ospp.vbs /act')
     chdir(old_path)
