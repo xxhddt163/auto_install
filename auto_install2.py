@@ -83,7 +83,7 @@ class Ui:
                         7: ["运行 Notepad++ v8.1.2(&R)CheckBox", 'click', 15],
                         8: ["完成(&F)Button", 'click', 5]}
 
-                sleep_time = [2, 0, 0, 0, 0, 0, 0, 0, 0]
+                sleep_time = [2, 1, 1, 1, 1, 1, 1, 1, 1]
                 program = Application(backend=main_window).start(
                     join(getcwd(), 'app_pkg', each, each))
 
