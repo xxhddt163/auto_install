@@ -71,25 +71,46 @@ class Ui:
                 else:
                     failure.extend(format_menu(each.split()))  # 安装失败记录安装失败程序
 
-            if each == 'npplus':
+            
+            if each == 'bzdsrf':
                 main_window = "win32"
-                step = {0: ["OKButton", 'click', 5],
+                step = {0: ["下一步(&N) >", 'click', 5],
                         1: ["下一步(&N) >", 'click', 5],
-                        2: ["我接受(&I)Button", 'click', 5],
-                        3: ["目标文件夹Edit", join(choose, each), 'edit', 5],
-                        4: ["下一步(&N) >", 'click', 5],
-                        5: ["下一步(&N) >", 'click', 5],
-                        6: ["安装(&I)Button", 'click', 5],
-                        7: ["运行 Notepad++ v8.1.2(&R)CheckBox", 'click', 15],
-                        8: ["完成(&F)Button", 'click', 5]}
+                        2: ["下一步(&N) >", 'click', 5],
+                        3: ["完成(&F) >Button", 'click', 5]
+                        }
 
-                sleep_time = [2, 1, 1, 1, 1, 1, 1, 1, 1]
+                sleep_time = [6, 2, 2, 2]
                 program = Application(backend=main_window).start(
                     join(getcwd(), 'app_pkg', each, each))
+                
+                sleep(5)
 
                 if simple_install(window_backend="win32", step=step, program=program, sleep_time=sleep_time):
-                    # 安装成功修改menu文件
-                    txt_change(prom_name=each, menu_change=menu_change)
+                    sleep(3)
+                    setup_path = join(getcwd(), 'app_pkg', each, "installer")
+                    copy(setup_path)
+                    hotkey('win', 'r')
+                    hotkey('ctrl', 'v')
+                    hotkey('enter')
+                    
+                    time = 5
+                    while time >= 0:
+                        try:
+                            program = Application().connect(title_re="班智达藏文输入法")
+                        except:
+                            sleep(1)
+                            time -= 1
+                        else:
+                            break
+                    
+                    step = {0: ["安装(&A)", 'click', 5],
+                            1: ["离开(&L)", 'click', 5]}
+
+                    sleep_time = [2,2]
+                    if simple_install(window_backend="win32", step=step, program=program, sleep_time=sleep_time):
+                        # 安装成功修改menu文件
+                        txt_change(prom_name=each, menu_change=menu_change)
                 else:
                     failure.extend(format_menu(each.split()))  # 安装失败记录安装失败程序
 
