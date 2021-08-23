@@ -22,8 +22,8 @@ def pr_crack():
         else:
             if step[i][-2] == 'click':
                 next_step.click_input()
-                if i in [3, 5]:
-                    sleep(1)
+                sleep(1.5)
             elif step[i][-2] == 'edit':
                 next_step.set_text(step[i][2])
+                sleep(1.5)
     pr_cra.kill()
